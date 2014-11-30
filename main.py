@@ -11,6 +11,19 @@ import json
 # argv[2] = dialog_id
 # argv[3] = person_name
 
+if( sys.argv[1] == '--help' ):
+    print """
+    Usage: python main.py <remixsid_cookie> <dialog_id> <name_of_folder>
+    <dialog_id> is a string parameter "sel" in address line which you see when open a dialog
+    """
+    exit()
+else:
+    if( len(sys.argv) < 4 ):
+        print """
+        Invalid number of arguments. Use parameter --help to know more
+        """
+        exit()
+
 remixsid_cookie = sys.argv[1]
 RequestData = {
     "act": "show",
@@ -20,16 +33,6 @@ RequestData = {
     "offset" : 0,
     "part" : 1
 }
-
-# remixssid_cookie = "8cb32fac0d58f6d70d9cb9263feee8bf8d4ccd6b864ac6ccafcc7"
-# RequestData = {
-#     "act": "show",
-#     "al": 1,
-#     "loc": "im",
-#     "w": "history" + "9816053" + "_photo",
-#     "offset" : 0,
-#     "part" : 1
-# }
 
 href = "http://vk.com/wkview.php"
 bound = {"count" : 10000, "offset" : 0}
