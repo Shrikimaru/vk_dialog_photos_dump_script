@@ -5,4 +5,4 @@ Python script for console which helps you to dump all photos from some dialog fr
 
 Use:
 
-python main.py <remixsid_cookie> <dialog_id> <name_of_folder>
+python main.py &lt;remixsid_cookie&gt; &lt;dialog_id&gt; &lt;name_of_folder&gt;
