@@ -5,4 +5,6 @@ Python script for console which helps you to dump all photos from some dialog fr
 
 Use:
 
-python main.py &lt;remixsid_cookie&gt; &lt;dialog_id&gt; &lt;name_of_folder&gt;
+<b>python main.py &lt;remixsid_cookie&gt; &lt;dialog_id&gt; &lt;name_of_folder&gt;</b>
+
+&lt;dialog_id&gt; is a string parametr "sel" in address line which you see when open a dialog
