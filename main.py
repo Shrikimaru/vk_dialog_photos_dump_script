@@ -34,25 +34,29 @@ RequestData = {
     "part" : 1
 }
 
-href = "http://vk.com/wkview.php"
+request_href = "http://vk.com/wkview.php"
 bound = {"count" : 10000, "offset" : 0}
 
 try:
     os.mkdir("drop_" + sys.argv[3])
 except OSError:
     print "Проблемы с созданием папки 'drop_" + sys.argv[3] + "'"
-os.chdir("drop_" + sys.argv[3])
+if( os.path.exists("drop_" + sys.argv[3]) ):
+    os.chdir("drop_" + sys.argv[3])
+else:
+    print "Не удалось создать папку\n"
+    exit()
 
 test = open("links", "w")
 while( bound['offset'] < bound['count'] ):
     RequestData['offset'] = bound['offset']
-    content = requests.post(href, cookies={"remixsid": remixsid_cookie}, params=RequestData).text
+    content = requests.post(request_href, cookies={"remixsid": remixsid_cookie}, params=RequestData).text
     json_data_offset = re.compile('\{"count":.+?,"offset":.+?\}').search(content)
-
-    links = re.compile('src="http://.+?"').findall(content)
     bound = json.loads(content[json_data_offset.span()[0]:json_data_offset.span()[1]])
     bound['count'] = int(bound['count'])
     bound['offset'] = int(bound['offset'])
+
+    links = re.compile('src="http://.+?"').findall(content)
 
     for st in links:
         test.write(st[5:len(st)-1] + '\n')
