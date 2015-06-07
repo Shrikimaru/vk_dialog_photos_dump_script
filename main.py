@@ -56,16 +56,18 @@ while( bound['offset'] < bound['count'] ):
     bound['count'] = int(bound['count'])
     bound['offset'] = int(bound['offset'])
 
-    links = re.compile('src="http://.+?"').findall(content)
+    links = re.compile('&quot;http://cs.+?"').findall(content)
 
     for st in links:
-        test.write(st[5:len(st)-1] + '\n')
+        st = st.replace("&quot;,&quot;x_&quot;:[&quot;", "")
+        test.write(st[6:st.find("&quot;", 6)] + '.jpg\n')
+
 test.close()
 
 test = open("links", "r")
 file_num = 0
 for href in test:
-    urllib.urlretrieve(href, str(file_num))
+    urllib.urlretrieve(href, str(file_num) + ".jpg")
     file_num += 1
     print "Скачано " + str(file_num) + " файлов\n"
 test.close()
