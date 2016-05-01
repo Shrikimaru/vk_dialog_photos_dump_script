@@ -11,11 +11,20 @@ import json
 # argv[2] = dialog_id
 # argv[3] = person_name
 
-if( sys.argv[1] == '--help' ):
+def printHelp():
     print """
     Usage: python main.py <remixsid_cookie> <dialog_id> <name_of_folder>
     <dialog_id> is a string parameter "sel" in address line which you see when open a dialog
     """
+
+try:
+    sys.argv[1]
+except IndexError:
+    printHelp()
+    exit()
+
+if( sys.argv[1] == '--help' ):
+    printHelp()
     exit()
 else:
     if( len(sys.argv) < 4 ):
@@ -25,6 +34,7 @@ else:
         exit()
 
 remixsid_cookie = sys.argv[1]
+
 RequestData = {
     "act": "show",
     "al": 1,
